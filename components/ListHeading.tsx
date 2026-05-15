@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 export default function ListHeader({ title }: ListHeadingProps) {
     return (
-        <View className="flex-row justify-between items-center mt-8 ">
+        <View className="flex-row justify-between items-center mt-8 mb-4 ">
             <Text className="font-semibold text-primary text-xl tracking-normal">{title}</Text>
 
 

@@ -1,10 +1,10 @@
 
 
 import { styled } from "nativewind";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
-import { HOME_BALANCE, HOME_USER } from "@/constatnts/data";
+import { HOME_BALANCE, HOME_USER, UPCOMING_SUBSCRIPTIONS } from "@/constatnts/data";
 import { icons } from "@/constatnts/icons";
 import { formatCurrency } from "@/lib/formatCurrency";
 
@@ -44,9 +44,24 @@ export default function App() {
 
       <ListHeader title="Upcoming" />
 
-      <SubscriptionCard />
 
+      <View>
+        <FlatList
+          data={UPCOMING_SUBSCRIPTIONS}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <SubscriptionCard {...item} />
+          )}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          className=""
+          contentContainerStyle={{ flexDirection: 'row', gap: 10 }}
+        />
+
+      </View>
       <ListHeader title="Subscriptions" />
+
+
 
     </SafeAreaView>
   );
