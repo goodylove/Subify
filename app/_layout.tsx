@@ -4,9 +4,12 @@ import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { StatusBar } from "react-native";
 
+
+
+SplashScreen.preventAutoHideAsync()
 export default function RootLayout() {
 
-  const [ isFontLoaded ]= useFonts({
+  const [isFontLoaded] = useFonts({
     'sans-regular': require('../assets/fonts/PlusJakartaSans-Regular.ttf'),
     'sans-bold': require('../assets/fonts/PlusJakartaSans-Bold.ttf'),
     'sans-medium': require('../assets/fonts/PlusJakartaSans-Medium.ttf'),
