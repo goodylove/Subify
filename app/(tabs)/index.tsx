@@ -1,3 +1,4 @@
+import { useUser } from "@clerk/expo";
 import { styled } from "nativewind";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
@@ -5,7 +6,6 @@ import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import {
   HOME_BALANCE,
   HOME_SUBSCRIPTIONS,
-  HOME_USER,
   UPCOMING_SUBSCRIPTIONS,
 } from "@/constatnts/data";
 import { icons } from "@/constatnts/icons";
@@ -22,6 +22,13 @@ const SafeAreaView = styled(RNSafeAreaView);
 
 export default function App() {
   const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
+  const { isLoaded, user } = useUser();
+
+  const displayName =
+    user?.fullName ||
+    [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
+    user?.primaryEmailAddress?.emailAddress ||
+    "Account";
 
   return (
     <SafeAreaView className="flex-1  p-5 bg-background">
@@ -33,15 +40,17 @@ export default function App() {
             <View className="flex-row justify-between items-center">
               <View className="flex-row items-center gap-4">
                 <Image
-                  source={{
-                    uri: "https://d3ixftfdfbmo81.cloudfront.net/gopaddi-media/backend/gopaddi/frontend/assets/w0a788m5Uf6OnLY1mbg8Ql56RCoLFG6wCqlE8k9R.jpg",
-                  }}
+                  source={
+                    isLoaded && user?.imageUrl
+                      ? { uri: user.imageUrl }
+                      : require("../../assets/images/avatar.png")
+                  }
                   className="h-17.5 w-17.5 rounded-full"
                   alt="profile-image"
                 />
 
                 <Text className="font-sans-bold text-xl leading-[20px]">
-                  {HOME_USER.name}
+                  {displayName}
                 </Text>
               </View>
 
