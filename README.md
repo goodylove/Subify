@@ -1,50 +1,41 @@
-# Welcome to your Expo app 👋
+# Subscription App (Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A simple subscription tracking UI built with Expo Router and NativeWind, with a custom email/password authentication flow powered by Clerk.
 
-## Get started
+## Tech
 
-1. Install dependencies
+- Expo + Expo Router (file-based routing)
+- NativeWind (Tailwind-style styling)
+- Clerk (@clerk/expo) + expo-secure-store for secure session token storage
+
+## Setup
+
+1. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Add your Clerk publishable key to `.env`:
+
+   ```env
+   EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+   ```
+
+3. Start the app:
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Scripts
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- `npm run lint` — lint the project
+- `npm run android` / `npm run ios` / `npm run web` — platform shortcuts
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Routes (high level)
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `app/(auth)/sign-in.tsx` — sign in (email/password)
+- `app/(auth)/sign-up.tsx` — sign up + email verification code
+- `app/(tabs)/*` — main app tabs (protected)
+- `app/(tabs)/settings.tsx` — account details + sign out
